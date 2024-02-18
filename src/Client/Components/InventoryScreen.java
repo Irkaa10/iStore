@@ -1,18 +1,18 @@
 package Client.Components;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class InventoryScreen {
-    public InventoryScreen() {
-        // Create a JFrame
-        JFrame frame = new JFrame("Inventory Management");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+public class InventoryScreen extends JPanel {
 
-        // Create a JPanel with BorderLayout for the main structure
-        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
+    public static InventoryScreen createInventoryScreen() {
+        return new InventoryScreen();
+    }
+
+    public InventoryScreen() {
+        setLayout(new BorderLayout(10, 10));
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
 
         // Create a JTable with non-modifiable data
         String[] columnNames = {"Name", "ID", "Price", "Quantity"};
@@ -34,12 +34,6 @@ public class InventoryScreen {
 
         // Add the JTable to a JScrollPane for scrollability
         JScrollPane scrollPane = new JScrollPane(userTable);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
-
-        // Add the mainPanel to the frame
-        frame.add(mainPanel);
-
-        // Set the frame to be visible
-        frame.setVisible(true);
+        add(scrollPane, BorderLayout.CENTER);
     }
 }
