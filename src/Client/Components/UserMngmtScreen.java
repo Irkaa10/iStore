@@ -12,7 +12,7 @@ public class UserMngmtScreen extends JPanel {
 
     private UserMngmtScreen() {
         setLayout(new BorderLayout(10, 10));
-        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
+        setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20)); // Add padding
 
         // Create a JTable with non-modifiable data
         String[] columnNames = {"Email", "ID", "Role"};

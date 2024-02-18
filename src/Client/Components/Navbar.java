@@ -6,7 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Navbar {
-    public static JPanel createNavbar(JFrame mainFrame) {
+    private static JPanel contentPanel; // Reference to the main content panel
+
+    public static JPanel createNavbar(JFrame mainFrame, JPanel mainContentPanel) {
+        contentPanel = mainContentPanel; // Set the reference to the main content panel
+
         JPanel navbarPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         // Create buttons for Home, Users, and Inventory
@@ -24,12 +28,10 @@ public class Navbar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Switch to UserMngmtScreen
-                // You need to implement the logic to switch screens
-                // For now, let's assume you have a method in the main frame to switch content
-                mainFrame.getContentPane().removeAll();
-                mainFrame.getContentPane().add(UserMngmtScreen.createUserMngmtScreen());
-                mainFrame.revalidate();
-                mainFrame.repaint();
+                contentPanel.removeAll();
+                contentPanel.add(UserMngmtScreen.createUserMngmtScreen(), BorderLayout.CENTER);
+                contentPanel.revalidate();
+                contentPanel.repaint();
             }
         });
 
@@ -38,12 +40,10 @@ public class Navbar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Switch to InventoryScreen
-                // You need to implement the logic to switch screens
-                // For now, let's assume you have a method in the main frame to switch content
-                mainFrame.getContentPane().removeAll();
-                mainFrame.getContentPane().add(InventoryScreen.createInventoryScreen());
-                mainFrame.revalidate();
-                mainFrame.repaint();
+                contentPanel.removeAll();
+                contentPanel.add(InventoryScreen.createInventoryScreen(), BorderLayout.CENTER);
+                contentPanel.revalidate();
+                contentPanel.repaint();
             }
         });
 
