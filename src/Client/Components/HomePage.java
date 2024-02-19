@@ -10,7 +10,8 @@ public class HomePage extends JFrame {
     public HomePage() {
         setTitle("Home Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 300);
+        setSize(600, 400);
+        setMinimumSize(new Dimension(600, 400));
         setLocationRelativeTo(null);
 
         JButton loginButton = new JButton("Login");

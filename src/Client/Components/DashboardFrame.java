@@ -14,6 +14,7 @@ public class DashboardFrame extends JFrame {
         setTitle("Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
+        setMinimumSize(new Dimension(600, 400));
         setLocationRelativeTo(null);
 
         JMenuBar menuBar = new JMenuBar();
@@ -52,11 +53,5 @@ public class DashboardFrame extends JFrame {
         });
 
         cardLayout.show(cardPanel, "Inventory");
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new DashboardFrame().setVisible(true);
-        });
     }
 }
