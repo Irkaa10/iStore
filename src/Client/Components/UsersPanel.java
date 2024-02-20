@@ -12,6 +12,7 @@ public class UsersPanel extends JPanel {
 
     public UsersPanel() {
         setLayout(new BorderLayout());
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add margins
 
         Object[][] initialUserData = {
                 {"John Doe", "john.doe@example.com"},
@@ -21,25 +22,41 @@ public class UsersPanel extends JPanel {
 
         currentTableModel = new DefaultTableModel(initialUserData, userColumnNames);
 
-        JLabel label = new JLabel("Users Panel");
-        label.setHorizontalAlignment(JLabel.CENTER);
-        add(label, BorderLayout.CENTER);
-
         JTable table = new JTable(currentTableModel);
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
         JButton addUserButton = new JButton("Add User");
         addUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object[] newUser = {"New User", "new.user@example.com"};
-                currentTableModel.addRow(newUser);
-
-                JOptionPane.showMessageDialog(null, "User added!");
+                // TODO: CODE SQL ADD USER
             }
         });
-        add(addUserButton, BorderLayout.NORTH);
+        buttonPanel.add(addUserButton);
+
+        JButton editUserButton = new JButton("Edit User");
+        editUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: CODE FOR EDITING USER
+            }
+        });
+        buttonPanel.add(editUserButton);
+
+        JButton deleteUserButton = new JButton("Delete User");
+        deleteUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: CODE FOR DELETING USER
+            }
+        });
+        buttonPanel.add(deleteUserButton);
+
+        add(buttonPanel, BorderLayout.WEST);
     }
 
     // You can add more methods as needed
