@@ -1,5 +1,5 @@
 
-package Client.Components.Frames;
+package Client.Components.Frames.Inventory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
