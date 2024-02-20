@@ -14,18 +14,17 @@ public class DashboardFrame extends JFrame {
         setTitle("Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
-        setMinimumSize(new Dimension(600, 400));
         setLocationRelativeTo(null);
 
         JMenuBar menuBar = new JMenuBar();
         JButton inventoryButton = new JButton("Inventory");
-        JButton usersButton = new JButton("Users");
         JButton storeButton = new JButton("Store");
+        JButton usersButton = new JButton("Users");
         JButton settingsButton = new JButton("Settings");
 
         menuBar.add(inventoryButton);
-        menuBar.add(usersButton);
         menuBar.add(storeButton);
+        menuBar.add(usersButton);
         menuBar.add(settingsButton);
         setJMenuBar(menuBar);
 
@@ -35,6 +34,7 @@ public class DashboardFrame extends JFrame {
 
         cardPanel.add(new InventoryPanel(), "Inventory");
         cardPanel.add(new UsersPanel(), "Users");
+        cardPanel.add(new SettingsPanel(), "Settings");
 
         add(cardPanel);
 
@@ -53,5 +53,18 @@ public class DashboardFrame extends JFrame {
         });
 
         cardLayout.show(cardPanel, "Inventory");
+
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "Settings");
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new DashboardFrame().setVisible(true);
+        });
     }
 }
