@@ -10,8 +10,7 @@ public class HomePage extends JFrame {
     public HomePage() {
         setTitle("Home Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
-        setMinimumSize(new Dimension(600, 400));
+        setSize(600, 300);
         setLocationRelativeTo(null);
 
         JButton loginButton = new JButton("Login");
@@ -44,17 +43,13 @@ public class HomePage extends JFrame {
     }
 
     private void showLoginPage() {
-        getContentPane().removeAll();
-        getContentPane().add(new LoginPage());
-        revalidate();
-        repaint();
+        dispose();
+        new LoginScreen();
     }
 
     private void showSignupPage() {
-        getContentPane().removeAll();
-        getContentPane().add(new SignupPage());
-        revalidate();
-        repaint();
+        dispose();
+        new SignupScreen();
     }
 
     public static void main(String[] args) {
