@@ -1,5 +1,6 @@
 package Client.Components;
 
+import Client.Components.Frames.Users.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class UsersPanel extends JPanel {
         addUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: CODE SQL ADD USER
+                new AddUserFrame(currentTableModel, table);
             }
         });
         buttonPanel.add(addUserButton);
@@ -42,7 +43,12 @@ public class UsersPanel extends JPanel {
         editUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: CODE FOR EDITING USER
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    new EditUserFrame(currentTableModel, table, selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(UsersPanel.this, "Please select an item to edit it.");
+                }
             }
         });
         buttonPanel.add(editUserButton);
@@ -51,7 +57,12 @@ public class UsersPanel extends JPanel {
         deleteUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: CODE FOR DELETING USER
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    new DeleteUserFrame(currentTableModel, table, selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(UsersPanel.this, "Please select a user to delete it.");
+                }
             }
         });
         buttonPanel.add(deleteUserButton);

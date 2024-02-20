@@ -1,8 +1,6 @@
 package Client.Components;
 
-import Client.Components.Frames.IncreaseStockFrame;
-import Client.Components.Frames.ReduceStockFrame;
-
+import Client.Components.Frames.Inventory.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -66,7 +64,7 @@ public class InventoryPanel extends JPanel {
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: CODE SQL ADD USER
+                new AddProductFrame(currentTableModel, table);
             }
         });
         buttonPanel.add(addProductButton);
@@ -75,7 +73,12 @@ public class InventoryPanel extends JPanel {
         editProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: CODE FOR EDITING USER
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    new EditProductFrame(currentTableModel, table, selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(InventoryPanel.this, "Please select an item to edit it.");
+                }
             }
         });
         buttonPanel.add(editProductButton);
@@ -84,7 +87,12 @@ public class InventoryPanel extends JPanel {
         deleteProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: CODE FOR DELETING USER
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    new DeleteProductFrame(currentTableModel, table, selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(InventoryPanel.this, "Please select an item to delete it.");
+                }
             }
         });
         buttonPanel.add(deleteProductButton);
