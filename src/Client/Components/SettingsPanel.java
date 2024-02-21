@@ -1,15 +1,16 @@
 package Client.Components;
 
-import Client.Components.Frames.Whitelist.WhitelistFrame;
+import server.SettingsInventory;
+import server.UserButton;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class SettingsPanel extends JPanel {
 
-    private DefaultTableModel whitelistTableModel;
+public class SettingsPanel extends JPanel {
+    private JTextField EmailChoice;
+    private JButton EmailButton;
 
     public SettingsPanel() {
         setLayout(new BorderLayout());
@@ -18,24 +19,57 @@ public class SettingsPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
-        JButton showWhitelistButton = new JButton("Show Whitelist");
-        showWhitelistButton.addActionListener(new ActionListener() {
+        JButton AddUserButton = new JButton("Add to Whitelist");
+        AddUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new WhitelistFrame(whitelistTableModel);
-            }
-        });
-        buttonPanel.add(showWhitelistButton);
+                // Create a new JFrame for user input
+                JFrame inputFrame = new JFrame("Add User");
+                inputFrame.setSize(900, 600);
+                inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JButton editUserButton = new JButton("Add to Whitelist");
-        editUserButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: CODE FOR EDITING USER
+                JPanel emailPanel = new JPanel(new GridBagLayout());
+                GridBagConstraints gdc = new GridBagConstraints();
+                gdc.insets = new Insets(5, 5, 5, 5);
+                gdc.gridx = 0;
+                gdc.gridy = 0;
+                emailPanel.add(new JLabel("Select the Email of the account: "), gdc);
+                gdc.gridx = 1;
+                gdc.gridy = 0;
+                gdc.fill = GridBagConstraints.HORIZONTAL;
+                EmailChoice = new JTextField(20);
+                emailPanel.add(EmailChoice, gdc);
+                gdc.gridx = 1;
+                gdc.gridy = 1;
+                gdc.anchor = GridBagConstraints.WEST;
+                EmailButton = new JButton("Confirm");
+                emailPanel.add(EmailButton, gdc);
+                EmailButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Implement logic to add product
+                        // Call the UserButton method with the entered values
+                        SettingsInventory SettingsButton = new SettingsInventory(
+                                EmailChoice,
+                                SettingsPanel.this,
+                                SettingsPanel.this,
+                                SettingsInventory.OperationType.WHITELIST_ADD
+                        );
+                        SettingsButton.actionPerformed(e);
+                        inputFrame.dispose();
+                    }
+                });
+                // Set layout for input frame
+                inputFrame.setLayout(new BorderLayout());
+                inputFrame.add(emailPanel, BorderLayout.CENTER);
+
+                // Display the input frame
+                inputFrame.setVisible(true);
             }
         });
-        buttonPanel.add(editUserButton);
+        buttonPanel.add(AddUserButton);
 
         add(buttonPanel, BorderLayout.WEST);
     }
+
 }

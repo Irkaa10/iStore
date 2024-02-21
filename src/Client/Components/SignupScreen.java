@@ -1,6 +1,6 @@
 package Client.Components;
 
-//import server.SignupListener;
+import server.SignupListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,8 +57,8 @@ public class SignupScreen extends JFrame {
 
         // signup button function
         // Inside SignupScreen class
-//        SignupListener signupListener = new SignupListener(emailField, passwordField, PseudoField, this);
-//        signupButton.addActionListener(signupListener);
+        SignupListener signupListener = new SignupListener(emailField, passwordField, PseudoField, this);
+        signupButton.addActionListener(signupListener);
 
 
         panel.add(signupButton, gbc);

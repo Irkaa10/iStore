@@ -1,6 +1,6 @@
 package Client.Components;
 
-//import server.LoginListener;
+import server.LoginListener;
 import javax.swing.*;
 import java.awt.*;
 
@@ -43,9 +43,9 @@ public class LoginScreen extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         LoginButton = new JButton("Login");
 
-//        LoginListener LoginListener = new LoginListener(emailField, passwordField, this);
-//        //refer to the file Client/LoginListener
-//        LoginButton.addActionListener(LoginListener);
+        LoginListener LoginListener = new LoginListener(emailField, passwordField, this);
+        //refer to the file Client/LoginListener
+        LoginButton.addActionListener(LoginListener);
 
         panel.add(LoginButton, gbc);
 
