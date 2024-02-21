@@ -3,8 +3,12 @@ package Server.Controllers;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import Client.Components.Frames.Inventory.ReduceStockFrame;
+import Server.DB.DBConfig;
 
 public class ReduceStockController implements ActionListener {
 
@@ -23,15 +27,8 @@ public class ReduceStockController implements ActionListener {
             int selectedRow = frame.getSelectedRow();
             String productName = frame.getCurrentTableModel().getValueAt(selectedRow, 0).toString();
 
-            // Print the SQL query to the console
-            printUpdateQuery(productName, removedStock);
-
-            // Update the table model (commented for testing purposes)
-            /*
-            int currentStock = Integer.parseInt(frame.getCurrentTableModel().getValueAt(selectedRow, 1).toString());
-            int newStock = currentStock - removedStock;
-            frame.getCurrentTableModel().setValueAt(newStock, selectedRow, 1);
-            */
+            // Execute the SQL update query to reduce the stock in the database
+            updateStockInDatabase(productName, removedStock);
 
             frame.dispose(); // Close the frame after updating
         } catch (NumberFormatException ex) {
@@ -39,9 +36,37 @@ public class ReduceStockController implements ActionListener {
         }
     }
 
-    private void printUpdateQuery(String productName, int removedStock) {
-        String query = "UPDATE YourStockTable SET stock_quantity = stock_quantity - ? WHERE product_name = ?";
-        System.out.println("Query to be executed: " + query);
-        System.out.println("Parameters: " + removedStock + ", " + productName);
+    private void updateStockInDatabase(String productName, int removedStock) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // Get a database connection
+            connection = DBConfig.getConnection();
+
+            // SQL query to update the stock in the 'YourStockTable' table
+            String query = "UPDATE Inventory SET Stock = Stock - ? WHERE ProductName = ?";
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set parameters for the query
+            preparedStatement.setInt(1, removedStock);
+            preparedStatement.setString(2, productName);
+
+            // Execute the update query
+            preparedStatement.executeUpdate();
+
+            System.out.println("Stock reduced successfully in the database.");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(frame, "Failed to update stock in the database.");
+        } finally {
+            // Close resources
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }

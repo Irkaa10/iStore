@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Server.DB.DatabaseUtils;
+
 public class InventoryPanel extends JPanel {
 
     private DefaultTableModel currentTableModel;
@@ -15,11 +17,8 @@ public class InventoryPanel extends JPanel {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        Object[][] initialInventoryData = {
-                {"Item A", "10", "19.99"},
-                {"Item B", "45", "9.99"},
-        };
-        Object[] inventoryColumnNames = {"Name","Stock", "Price"};
+        Object[][] initialInventoryData = DatabaseUtils.fetchData("Inventory");
+        Object[] inventoryColumnNames = {"Name", "Stock", "Price"};
 
         currentTableModel = new DefaultTableModel(initialInventoryData, inventoryColumnNames);
 
@@ -98,7 +97,6 @@ public class InventoryPanel extends JPanel {
         buttonPanel.add(deleteProductButton);
 
         add(buttonPanel, BorderLayout.WEST);
-    }
 
-    // You can add more methods as needed
+    }
 }
