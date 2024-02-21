@@ -1,5 +1,7 @@
 package Client.Components;
 
+import Client.Components.Frames.Whitelist.WhitelistFrame;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -7,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class SettingsPanel extends JPanel {
 
+    private DefaultTableModel whitelistTableModel;
 
     public SettingsPanel() {
         setLayout(new BorderLayout());
@@ -15,14 +18,14 @@ public class SettingsPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
-        JButton addUserButton = new JButton("Show Whitelist");
-        addUserButton.addActionListener(new ActionListener() {
+        JButton showWhitelistButton = new JButton("Show Whitelist");
+        showWhitelistButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: CODE SQL ADD USER
+                new WhitelistFrame(whitelistTableModel);
             }
         });
-        buttonPanel.add(addUserButton);
+        buttonPanel.add(showWhitelistButton);
 
         JButton editUserButton = new JButton("Add to Whitelist");
         editUserButton.addActionListener(new ActionListener() {
@@ -33,19 +36,6 @@ public class SettingsPanel extends JPanel {
         });
         buttonPanel.add(editUserButton);
 
-        JButton deleteUserButton = new JButton("Delete User");
-        deleteUserButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: CODE FOR DELETING USER
-            }
-        });
-        buttonPanel.add(deleteUserButton);
-
-        JButton createStoreButton = new JButton("Create store");
-        buttonPanel.add(createStoreButton);
-
         add(buttonPanel, BorderLayout.WEST);
     }
-
 }

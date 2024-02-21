@@ -33,6 +33,7 @@ public class DashboardFrame extends JFrame {
         cardPanel.setLayout(cardLayout);
 
         cardPanel.add(new InventoryPanel(), "Inventory");
+        cardPanel.add(new StorePanel(), "Store");
         cardPanel.add(new UsersPanel(), "Users");
         cardPanel.add(new SettingsPanel(), "Settings");
 
@@ -43,6 +44,11 @@ public class DashboardFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardPanel, "Inventory");
             }
+        });
+
+        storeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { cardLayout.show(cardPanel, "Store"); }
         });
 
         usersButton.addActionListener(new ActionListener() {
